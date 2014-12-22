@@ -1,5 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+
+
 <div class="global-footer">
 		<div class="footer-nav">
 			<div class="container">

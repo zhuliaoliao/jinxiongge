@@ -3,6 +3,7 @@ function checkname(){
 	var name=$('#form_accountsetting_usernamee').val();
 		$.ajax({
 			url :'/jinxiongge/user/isexist.do',
+			type:'POST',
 			data : {username :name},
 			async : false,
 			success :function(data){
@@ -22,6 +23,7 @@ function checktel(){
 	var phone=$('#form_accountsetting_tel').val();
 	$.ajax({
 		url :'/jinxiongge/user/isexist.do',
+		type:'POST',
 		data : {tel :phone},
 		async : false,
 		success :function(data){

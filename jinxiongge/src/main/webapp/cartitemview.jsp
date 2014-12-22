@@ -53,7 +53,7 @@
 			<!-- Start of Session time out warning -->
 				<div class="alert alert-warning alert-dismissable inline-alert type-flama hidden" data-content-timer="60000" data-delay-show="900000">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-							<p> 请在<span data-countdown-redirect-url="/cn/expireSession.html" data-countdown-time="900" class="text-primary timer"></span>内提交订单，以免购物车清空。加油哦！</p>
+							<p> 请在<span data-countdown-redirect-url="# " data-countdown-time="900" class="text-primary timer"></span>内提交订单，以免购物车清空。加油哦！</p>
 				</div>		
 			<!-- End of Session time out warning -->
 		</div>
@@ -97,35 +97,39 @@
 		
 		<div class="panel-section-group">
 		<!-- 提交订单* ************************************************************-->
-		<form action="/jinxiongge/orders/add.do" method="post">
+		<form action="/jinxiongge/orders/add.do" method="post"  role="form" data-form-sync="#form_consentnewnumber" 
+		class="form form-register" id="form_accountsetting" name="form_accountsetting" data-required-symbol="*" novalidate="novalidate">
+		
+	<!-- 	<form action="/jinxiongge/user/regist.do" method="post" role="form" data-form-sync="#form_consentnewnumber" 
+		class="form form-register" id="form_accountsetting" name="form_accountsetting" data-required-symbol="*" novalidate="novalidate"> -->
 					<section class="panel-section section-delivery-address">
 										<table class="table-default table-delivery-address">
 											<tbody>
 												<tr>
-													<th scope="row"><font color="red">* </font> 收件人:
+													<th scope="row"><span class="required-symbol">*</span> 收件人:
 													</th>
 													<td>
 														<div>
-														<input type="text" name="addresseename"  size="100">
+														<input type="text" name="addresseename"  class="required" aria-required="true" size="100">
 														</div> 
 													</td>
 												</tr>
 												
 												<tr>
-													<th scope="row"><font color="red">* </font> 电 话:
+													<th scope="row"><span class="required-symbol">*</span> 电 话:
 													</th>
 													<td>
-														<input type="text" name="addresseetel"  size="100">
+														<input type="text" name="addresseetel" class="required" aria-required="true" size="100">
 													</td>
 												</tr>
 												
 												
 												<tr>
-													<th scope="row"><font color="red">* </font> 送餐至:
+													<th scope="row"><span class="required-symbol">*</span> 送餐至:
 													</th>
 													<td>
 														<div>
-														<input type="text" name="address" width="100%" size="100">
+														<input type="text" name="address" class="required"  aria-required="true" width="100%" size="100">
 														</div> 
 													</td>
 												</tr>
@@ -172,12 +176,12 @@
 				</form>
 	<!-- 提交订单结束* ************************************************************-->
 	
-	
+	<jsp:include page="messagebox.jsp"></jsp:include>
 <c:if test="${sessionScope.cartmap!=null}">
 									<section class="panel-section section-order-items">
 										<h3>购物车明细</h3>
 										
-										<form class="order-items item-list" action="" method="DELETE">
+										<form class="order-items item-list" action="" >
 					
 										
 	
@@ -1033,7 +1037,7 @@
 			            <div class="modal-body">
 			                <div class="row">
 			                    <div class="col-xs-3 timer-wrapper">
-			                        <div class="time timer text-din timer-clock" data-countdown-time="300" data-countdown-redirect-url="/cn/expireSession.html"></div>
+			                        <div class="time timer text-din timer-clock" data-countdown-time="300" data-countdown-redirect-url="# "></div>
 			                        <div class="time-disclaimer">后清空购物车</div>
 			                    </div>
 			                    <div class="col-xs-8 timer-wrapper">                                   

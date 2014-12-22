@@ -31,9 +31,7 @@
     	 
     </head>
 <body class="country-86 lang-zh ">
-<c:if test="${result.message!=null}">
-	<script type="text/javascript" >alert('${result.message}');</script>
-</c:if>
+
 <!--[if lt IE 9]>
             <p id="outdated" class="browsehappy">您目前使用的浏览器版本过低，为保证您正常浏览网页，请<a href="http://browsehappy.com/?locale=zh" target="_blank">升级</a>至最新版本。</p>
 <![endif]-->
@@ -59,43 +57,47 @@
 		</div>
 			<div class="main" role="main">
 				<div class="row row-narrow">
-						<div class="page-sidebar">
+					<div class="page-sidebar">
 						<jsp:include page="navigate.jsp"></jsp:include>
 					</div>
 					
 					<div class="col-xs-10">
 		<div class="page-title">
-			<h1>账户设置</h1>
+			<h1>详细信息</h1>
 		</div>
 		<div class="page-content">
 			<div class="panel-lg panel panel-default">
 				<div class="panel-heading">
-					<h3>编辑资料</h3>
+					<h3>菜品资料</h3>
 				</div>
 				<div class="panel-body">
+				<c:if test="${result.data!=null}">
 					<div class="row">
+					<jsp:include page="messagebox.jsp"></jsp:include>
 						<div class="col-xs-12">
-							<form action="/jinxiongge/user/update.do" method="post" role="form" data-form-sync="#form_consentnewnumber" class="form form-register" id="form_accountsetting" name="form_accountsetting" data-required-symbol="*" novalidate="novalidate">
 								<div class="form-register error-container">
-								
 							
-							<c:if test="${user!=null}">
-							<input type="hidden" name="uid"  value='${user.uid}' />
-							
-							</c:if>
+						
 									<p>请更新以下标注的内容。</p>
 								</div>
 								
 								<fieldset class="fieldset">
-									<div class="fieldset-heading">
-										<p class="instructions" ><font color="red">* 为必填内容</font></p>
+									<div class="row">
+										<div class="col-xs-12">
+											 <div class="form-group">
+												 <label class="field-label" for="form_accountsetting_username">图片:
+<img height="180px" width="180px" alt="${result.data.goodsname} 促销价:${result.data.nowprice}" src="/jinxiongge/goods/picture.do?gid=${result.data.gid}">
+</label>
+												 
+												
+											</div> 
+										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
 											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_username"><span class="required-symbol">*</span>用户名:</label>
+												 <label class="field-label" for="form_accountsetting_username">菜名:${result.data.goodsname}</label>
 												 
-												 <input type="text" class="form-control input-lg required" id="form_accountsetting_username" name="username" value='<c:out value="${user.username}"  escapeXml="false" default="必填"/>' aria-required="true">
 												
 											</div> 
 										</div>
@@ -105,9 +107,8 @@
 									<div class="row">
 										<div class="col-xs-12">
 											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_pwd"><span class="required-symbol">*</span>密码:(直接输入新密码)</label>
+												 <label class="field-label" for="form_accountsetting_pwd">原价:${result.data.price}</label>
 												 
-												 <input type="password" class="form-control input-lg required" id="form_accountsetting_pwd" name="pwd"  aria-required="true">
 												
 											</div> 
 										</div>
@@ -116,9 +117,28 @@
 									<div class="row">
 										<div class="col-xs-12">
 											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_truename"><span class="required-symbol">*</span>真实姓名:</label>
+												 <label class="field-label" for="form_accountsetting_truename">促销价:${result.data.nowprice}</label>
 												 
-												 <input type="text" class="form-control input-lg required" id="form_accountsetting_truename" name="truename" value='<c:out value="${user.truename}"  escapeXml="false" default="必填"/>' aria-required="true">
+											</div> 
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="col-xs-12">
+											 <div class="form-group">
+												 <label class="field-label" for="form_accountsetting_tel">是否特价:${result.data.specialprice}</label>
+												
+											</div> 
+										</div>
+									</div>
+									
+									
+									
+									<div class="row">
+										<div class="col-xs-12">
+											 <div class="form-group">
+												 <label class="field-label" for="form_accountsetting_birthday">已出售:${result.data.havebuy}	    </label><br/>
+												 
 												
 											</div> 
 										</div>
@@ -127,22 +147,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_tel"><span class="required-symbol">*</span>手机:</label>
-												 
-												 <input type="text" class="form-control input-lg required" id="form_accountsetting_tel" name="tel" value='<c:out value="${user.tel}"  escapeXml="false" default="必填"/>' aria-required="true">
-												
-											</div> 
-										</div>
-									</div>
-									
-									
-									<div class="row">
-										<div class="col-xs-12">
-											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_birthday"><span class="required-symbol">*</span>出生年月:	    </label><br/>
-												 <label class="field-label" for="form_accountsetting_birthday"><span class="required-symbol">*</span>格式:yyyy-MM-dd  </label>
-												 
-												 <input type="text" class="form-control input-lg" id="form_accountsetting_birthday" name="birthday" value='<c:out value="${user.birthday}"  escapeXml="false" default="必填"/>' aria-required="true">
+												 <label class="field-label" for="form_accountsetting_sex">点赞数:${result.data.dianzan}</label>
 												
 											</div> 
 										</div>
@@ -151,74 +156,37 @@
 									<div class="row">
 										<div class="col-xs-12">
 											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_sex">性别:</label>
-												 
-												 <input type="text" class="form-control input-lg" id="form_accountsetting_sex" name="sex" value='<c:out value="${user.sex}"  escapeXml="false" default="男"/>' aria-required="true">
-												
-											</div> 
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="col-xs-12">
-											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_city">所在城市:</label>
-												 
-												 <input type="text" class="form-control input-lg" id="form_accountsetting_city" name="city" value='<c:out value="${user.city}"  escapeXml="false" default="浙江"/>' aria-required="true">
-												
-											</div> 
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="col-xs-12">
-											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_address">默认配送地址:</label>
-												 
-												 <input type="text" class="form-control input-lg" id="form_accountsetting_address" name="address" value='<c:out value="${user.address}"  escapeXml="false" default="可选"/>' aria-required="true">
-												
-											</div> 
-										</div>
-									</div>
-									
-									<div class="row">
-										<div class="col-xs-12">
-											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_email">email:</label>
-												 
-												 <input type="text" class="form-control input-lg" id="form_accountsetting_email" name="email" value='<c:out value="${user.email}"  escapeXml="false" default="可选"/>' aria-required="true">
+												 <label class="field-label" for="form_accountsetting_tel">菜品描述:${result.data.introduce}</label>
 												
 											</div> 
 										</div>
 									</div>
 									
 									
-									
-									
-									<div class="row">
-										<div class="col-xs-12">
-											 <div class="form-group">
-												 <label class="field-label" for="form_accountsetting_postcode">邮编:</label>
-												 
-												 <input type="text" class="form-control input-lg" id="form_accountsetting_postcode" name="postcode" value='<c:out value="${user.postcode}"  escapeXml="false" default="可选"/>' aria-required="true">
-												
-											</div> 
-										</div>
-									</div>
-
+								
 								</fieldset>
 					
 								
 								<fieldset class="fieldset form-actions">
 									<div class="form-group">
-										<button type="submit" class="btn btn-red btn-xl btn-submit">保存</button>
+										<a class="btn btn-red btn-block action-create" onclick="addcart(${result.data.gid},'${result.data.goodsname}',${result.data.nowprice})" >加入购物车</a>
+									</div>
+									<div class="form-group">
+										<a class="btn btn-red btn-block action-create" href="/jinxiongge/goods/goodspage.do?status=1" >继续购物</a>
+									</div>
+									<div class="form-group">
+										<a class="btn btn-red btn-block action-create" href="/jinxiongge/cartitemview.jsp" >结算</a>
 									</div>
 								</fieldset>
-							<input type="hidden" name="csrfValue" value="AA614A1"></form>
 						</div>
 					</div>
+					</c:if>
 				</div>
+				
+					
+				
 			</div>
+			
 		</div>
 	</div>
 					

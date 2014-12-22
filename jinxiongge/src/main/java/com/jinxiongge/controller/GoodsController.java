@@ -80,7 +80,7 @@ public class GoodsController
 			}
 			result=goodsService.add(goods);
 			if(result.getCode()==0){
-				return new ModelAndView("redirect:goods/mgoodspage.do");
+				return new ModelAndView("redirect:/goods/mgoodspage.do");
 			}
 		} catch (CommonException e) {
 			result.setCode(e.getCode());
@@ -126,7 +126,7 @@ public class GoodsController
 		String message = "";
 		try {
 			goods.setUpdatetime(JinXiongGeUtil.StandardDate2String(new Date()));//修改更新时间
-			if(file!=null){
+			if(file!=null&&file.getSize()>0){
 				goods.setPicture(file.getBytes());
 			}
 			result=goodsService.update(goods);
@@ -191,7 +191,7 @@ public class GoodsController
 			message = e.toString();
 		}
 		log.info("message: " + message);
-		return new ModelAndView("redirect:goods/mgoodspage.do", "result", result);//返回主键重新删除
+		return new ModelAndView("redirect:/goods/mgoodspage.do", "result", result);//返回主键重新删除
 	}
 	
 	/**
@@ -377,6 +377,31 @@ public class GoodsController
 	}
 	
 	
+	@RequestMapping(value = "/detail")
+	public ModelAndView goodsdetail(int gid,HttpServletRequest request ) {
+		
+		RtResult result = new RtResult();
+		String message="";
+		try {
+			result=goodsService.getByID(gid);
+			return new ModelAndView("goodsdetail","result", result);
+		}catch (CommonException e) {
+			result.setCode(e.getCode());
+			result.setMessage(e.getMessage());
+			if(e.getCause()!=null){
+				message=e.getCause().toString();
+			}else{
+				message=e.toString();
+			}
+		}catch (Exception e) {
+			result.setCode(ErrorCode.GOOD_CODE);
+			result.setMessage("网络错误,请重试!");
+			message=e.toString();
+		}
+		log.info("message: "+message);
+		
+		return new ModelAndView("redirect:goods/goodspage.do","result", result);
+	}
 	
 	@RequestMapping(value = "/goindex")
 	public ModelAndView goindex() {

@@ -50,7 +50,7 @@
 			<!-- Start of Session time out warning -->
 				<div class="alert alert-warning alert-dismissable inline-alert type-flama hidden" data-content-timer="60000" data-delay-show="900000">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-							<p> 请在<span data-countdown-redirect-url="/cn/expireSession.html" data-countdown-time="900" class="text-primary timer"></span>内提交订单，以免购物车清空。加油哦！</p>
+							<p> 请在<span data-countdown-redirect-url="# " data-countdown-time="900" class="text-primary timer"></span>内提交订单，以免购物车清空。加油哦！</p>
 				</div>		
 			<!-- End of Session time out warning -->
 		</div>
@@ -123,7 +123,10 @@ td{ padding-top: 17px}
 				<font color="blue">已点赞</font>
 				</td>
 				<td align="center">
-				<font color="blue">操作</font>
+				<font color="blue">修改</font>
+				</td>
+				<td align="center">
+				<font color="blue">删除</font>
 				</td>
 			</tr>
 			
@@ -163,7 +166,10 @@ td{ padding-top: 17px}
 				${item.dianzan}
 				</td>
 				<td align="center">
-				<a href="/jinxiongge/goods/goupdate.do?gid=${item.gid}">修改</a>
+				<a href="/jinxiongge/goods/goupdate.do?gid=${item.gid}">修改</a><br/>
+				</td>
+				<td align="center">
+				<a href="/jinxiongge/goods/delete.do?gid=${item.gid}">删除</a>
 				</td>
 			</tr>
 						

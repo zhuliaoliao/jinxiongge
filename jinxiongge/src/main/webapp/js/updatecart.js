@@ -4,10 +4,11 @@ function updatecart(pid,pflag){
 		$.ajax({
 			url :'/jinxiongge/shoppingcart/update.do',
 			data : {gid :pid,flag :pflag},
+			type:'POST',
 			async : false,
-			success :function(data){
-				alert(data.message);
-				if(data.code==0){
+			success :function(result){
+				alert(result.message);
+				if(result.code==0){
 					location.reload();
 				}
 			}
@@ -20,10 +21,11 @@ function deletecartitem(pid){
 	$.ajax({
 		url :'/jinxiongge/shoppingcart/delete.do',
 		data : {gid :pid},
+		type:'POST',
 		async : false,
-		success :function(data){
-			alert(data.message);
-			if(data.code==0){
+		success :function(result){
+			alert(result.message);
+			if(result.code==0){
 				location.reload();
 			}
 		}

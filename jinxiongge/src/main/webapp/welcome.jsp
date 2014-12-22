@@ -31,13 +31,11 @@
 	<body class="country-86 lang-zh page-home">
 		
 <c:if test="${result.message!=null}">
-	<script type="text/javascript" >alert('${result.message}');</script>
-</c:if>
-		
-		
-<!-- <div id="myDiv"><h2>Let AJAX change this text</h2></div>
-<button id="b01" type="button">Change Content</button> -->
+	<script type="text/javascript" >alert('${result.message}');
 	
+	</script>
+</c:if>
+
 	
 	
 	<!--[if lt IE 9]>	 
@@ -149,6 +147,7 @@
 <!-- Begin Quick Order Section -->
  <section class="quick-order home-quick-order home-section">
 	<h1 class="section-title">超值特惠餐</h1>
+	<jsp:include page="messagebox.jsp"></jsp:include>
 	<div class="colsize-5-row" data-equal-height=".product-title">
 	
 
@@ -159,7 +158,9 @@
 			<div class="colsize-5 colsize-5-1of5">
 										<div class="panel panel-default panel-product">
 											<div class="panel-body">
+											<a href="/jinxiongge/goods/detail.do?gid=${item.gid}">
 												<img class="img-block" height="188px" width="300px" alt="" src="/jinxiongge/goods/picture.do?gid=${item.gid}">
+											</a>
 												<h5 class="product-title" style="height: 38px;">${item.goodsname}</h5>
 												 <h5 class="product-title" style="height: 38px;">已出售:${item.havebuy}&nbsp&nbsp <a class="pointlike" onclick="pointlike(${item.gid})"> 点赞</a>(${item.dianzan})</h5>
 												 

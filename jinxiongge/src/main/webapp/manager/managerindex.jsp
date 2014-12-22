@@ -50,7 +50,7 @@
 			<!-- Start of Session time out warning -->
 				<div class="alert alert-warning alert-dismissable inline-alert type-flama hidden" data-content-timer="60000" data-delay-show="900000">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-							<p> 请在<span data-countdown-redirect-url="/cn/expireSession.html" data-countdown-time="900" class="text-primary timer"></span>内提交订单，以免购物车清空。加油哦！</p>
+							<p> 请在<span data-countdown-redirect-url="# " data-countdown-time="900" class="text-primary timer"></span>内提交订单，以免购物车清空。加油哦！</p>
 				</div>		
 			<!-- End of Session time out warning -->
 		</div>

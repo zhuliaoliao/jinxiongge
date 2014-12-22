@@ -94,6 +94,7 @@
 					</div>
 				</div>
 				<div class="page-content">
+				<jsp:include page="messagebox.jsp"></jsp:include>
 					<div class="row row-narrow">
 						<div class="col-xs-8">
 							<div id="product-cards" data-equal-height=".col-xs-6 .product-title">
@@ -113,7 +114,10 @@
 									<div class="col-lg-4 col-xs-6">
 										<div class="panel panel-default panel-product">
 											<div class="panel-body">
+											<a href="/jinxiongge/goods/detail.do?gid=${item.gid}">
+											
 												<img class="img-block" height="188px" width="300px" alt="${item.goodsname}" src="/jinxiongge/goods/picture.do?gid=${item.gid}">
+											</a>
 												<h5 class="product-title" style="height: 38px;">${item.goodsname}</h5>
 												 <h5 class="product-title" style="height: 38px;">已出售:${item.havebuy}&nbsp&nbsp <a class="pointlike" onclick="pointlike(${item.gid})"> 点赞</a>(${item.dianzan})</h5>
 												<div class="product-badges">
