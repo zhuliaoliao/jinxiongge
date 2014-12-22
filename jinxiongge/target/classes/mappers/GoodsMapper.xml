@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinxiongge.model.Goods">
+	<resultMap id="goodsMap" type="com.jinxiongge.model.Goods">
+		<id column="gid" property="gid" jdbcType="INTEGER" />
+		<result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
+		<result column="introduce" property="introduce" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DOUBLE" />
+		<result column="nowprice" property="nowprice" jdbcType="DOUBLE" />
+		<result column="picture" property="picture" jdbcType="BLOB" />
+		<result column="createtime" property="createtime" jdbcType="DATE" />
+		<result column="updatetime" property="updatetime" jdbcType="DATE" />
+		<result column="specialprice" property="specialprice" jdbcType="VARCHAR" />
+		<result column="havebuy" property="havebuy" jdbcType="INTEGER" />
+		<result column="dianzan" property="dianzan" jdbcType="INTEGER" />
+	</resultMap>
+	
+
+
+	<!-- 表名 -->
+	<sql id="tableNameSql">
+		goods 
+	</sql>
+
+	<!-- 用于select查询公用抽取的列       注：查询不需要获取图片-->
+	<sql id="commonSelectColumnsPrefix">
+		gid,
+		goodsname,
+		introduce,
+		price,
+		nowprice,
+		createtime,
+		updatetime,
+		specialprice,
+		havebuy,
+		dianzan
+	</sql>
+	
+	
+	<!-- 用于update,insert的公用抽取的列 -->
+	<sql id="commonInsertColumnsPrefix">
+		gid,
+		goodsname,
+		introduce,
+		price,
+		nowprice,
+		picture,
+		createtime,
+		updatetime,
+		specialprice,
+		havebuy,
+		dianzan
+	</sql>
+	
+	
+
+	<!-- 按主键查找条件语句 -->
+	<sql id="conditionOnlyId">
+		gid = #{gid}
+	</sql>
+
+	<sql id="mainSql">
+		SELECT
+		<include refid="commonSelectColumnsPrefix" />
+		FROM
+		<include refid="tableNameSql" /> 
+	</sql>
+
+	<sql id="varSql">
+		<where>
+			<if test="goodsname!=null and goodsname!=''">and goodsname like '%${goodsname}%' </if>
+			<if test="specialprice!=null and specialprice!=''">and specialprice = #{specialprice} </if>
+		</where>
+		<!-- order by createtime desc -->
+	</sql>
+
+	<!-- 条件分页查询 -->
+	<select id="getById" parameterType="java.util.Map" resultMap="goodsMap">
+		<include refid="mainSql" />
+		where
+		<include refid="conditionOnlyId" />
+		
+	</select>
+
+	<!-- 条件分页查询 -->
+	<select id="findPageBy" parameterType="java.util.Map" resultMap="goodsMap">
+		<include refid="mainSql" />
+		<include refid="varSql" />
+	</select>
+
+	<!-- 数量条件查询 -->
+	<select id="getCountBy" parameterType="java.util.Map"
+		resultType="INTEGER">
+		SELECT
+		COUNT(*) AS C
+		FROM
+		<include refid="tableNameSql" />
+		<include refid="varSql" />
+	</select>
+	
+	
+	<!-- 数量条件查询 -->
+	<select id="getPicture" parameterType="String" resultMap="goodsMap">
+		SELECT
+		gid,picture 
+		FROM
+		<include refid="tableNameSql" />
+		where
+		<include refid="conditionOnlyId" />
+	</select>
+
+	<insert id="save" parameterType="com.jinxiongge.model.Goods">
+		insert into
+		<include refid="tableNameSql" />
+		(
+		<include refid="commonInsertColumnsPrefix" />
+		)
+		values
+		(
+		#{gid, jdbcType=INTEGER} ,
+		#{goodsname, jdbcType=VARCHAR} ,
+		#{introduce, jdbcType=VARCHAR} ,
+		#{price, jdbcType=DOUBLE} ,
+		#{nowprice, jdbcType=DOUBLE} ,
+		#{picture, jdbcType=BLOB} ,
+		#{createtime, jdbcType=DATE} ,
+		#{updatetime, jdbcType=DATE} ,
+		#{specialprice, jdbcType=VARCHAR},
+		#{havebuy, jdbcType=INTEGER},
+		#{dianzan, jdbcType=INTEGER}
+		)
+	</insert>
+	<update id="update" parameterType="com.jinxiongge.model.Goods">
+		update
+		<include refid="tableNameSql" />
+		set
+		goodsname = #{goodsname, jdbcType=VARCHAR} ,
+		introduce = #{introduce, jdbcType=VARCHAR} ,
+		price = #{price, jdbcType=DOUBLE} ,
+		nowprice = #{nowprice, jdbcType=DOUBLE} ,
+		<if test="picture!=null">picture = #{picture, jdbcType=BLOB} ,</if>
+		updatetime = #{updatetime, jdbcType=DATE} ,
+		specialprice = #{specialprice, jdbcType=VARCHAR}
+		where
+		<include refid="conditionOnlyId" />
+	</update>
+	
+	<update id="dianzan" parameterType="java.lang.Integer">
+		update
+		<include refid="tableNameSql" />
+		set
+		dianzan = dianzan + 1
+		where
+		<include refid="conditionOnlyId" />
+	</update>
+	
+	<update id="addhavebuy" parameterType="java.util.Map">
+		update
+		<include refid="tableNameSql" />
+		set
+		havebuy = #{havebuy, jdbcType=INTEGER}
+		where
+		<include refid="conditionOnlyId" />
+	</update>
+	
+
+
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from <include refid="tableNameSql"/> where <include refid="conditionOnlyId"/>
+	</delete>
+
+</mapper>

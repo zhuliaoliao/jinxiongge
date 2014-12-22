@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinxiongge.model.ShoppingCartItem">
+	<resultMap id="ordersgoodsMap" type="com.jinxiongge.model.ShoppingCartItem">
+		<id column="ogid" property="ogid" jdbcType="INTEGER" />
+		<result column="oid" property="oid" jdbcType="INTEGER" />
+		<result column="gid" property="gid" jdbcType="INTEGER" />
+		<result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
+		<result column="goodsprice" property="goodsprice" jdbcType="DOUBLE" />
+		<result column="goodscount" property="goodscount" jdbcType="INTEGER" />
+		<result column="itemTotalPrice" property="itemTotalPrice" jdbcType="DOUBLE" />
+	</resultMap>
+	
+
+	<!-- orders_goods表名 -->
+	<sql id="tableNameSql">
+		orders_goods 
+	</sql>
+
+	<!-- 用于select查询、insert的公用抽取的列 -->
+	<sql id="commonSelectColumnsPrefix">
+		ogid,
+		oid,
+		gid,
+		goodsname,
+		goodsprice,
+		goodscount,
+		itemTotalPrice
+	</sql>
+
+
+	<sql id="mainSql">
+		SELECT
+		<include refid="commonSelectColumnsPrefix" />
+		FROM
+		<include refid="tableNameSql" /> 
+	</sql>
+	
+	<!-- 查询某订单号的购买物品-->
+	<select id="commonselect" parameterType="java.util.Map" resultMap="ordersgoodsMap">
+		<include refid="mainSql" />
+		where oid = #{oid}
+	</select>
+
+	
+
+	<!-- 插入该订单的购买物品-->
+	<insert id="batchInsert" parameterType="java.util.List">
+		insert into
+		<include refid="tableNameSql" />
+		(
+		<include refid="commonSelectColumnsPrefix" />
+		)
+		values
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+		#{item.ogid, jdbcType=INTEGER} ,
+		#{item.oid, jdbcType=INTEGER} ,
+		#{item.gid, jdbcType=INTEGER} ,
+		#{item.goodsname, jdbcType=VARCHAR} ,
+		#{item.goodsprice, jdbcType=DOUBLE} ,
+		#{item.goodscount, jdbcType=INTEGER} ,
+		#{item.itemTotalPrice, jdbcType=DOUBLE}
+		)
+		</foreach>
+	</insert>
+	
+
+
+
+</mapper>

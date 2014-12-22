@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinxiongge.model.Orders">
+	<resultMap id="ordersMap" type="com.jinxiongge.model.Orders">
+		<id column="oid" property="oid" jdbcType="INTEGER" />
+		<result column="uid" property="uid" jdbcType="INTEGER" />
+		<result column="addresseename" property="addresseename" jdbcType="VARCHAR" />
+		<result column="addresseetel" property="addresseetel" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="pay" property="pay" jdbcType="VARCHAR" />
+		<result column="carry" property="carry" jdbcType="VARCHAR" />
+		<result property="orderdate" column="orderdate" javaType="STRING" jdbcType="DATE" />
+		<result property="totalprice" column="totalprice" jdbcType="DOUBLE" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+
+	<!-- 表名 -->
+	<sql id="tableNameSql">
+		orders 
+	</sql>
+
+	<!-- 用于select查询、insert的公用抽取的列 -->
+	<sql id="commonSelectColumnsPrefix">
+	    oid,
+		uid,
+		addresseename,
+		addresseetel,
+		address,
+		pay,
+		carry,
+		orderdate,
+		totalprice,
+		remark,
+		status
+	</sql>
+
+	<!-- 按主键查找条件语句 -->
+	<sql id="conditionOnlyId">
+		oid = #{oid}
+	</sql>
+
+	<sql id="mainSql">
+		SELECT
+		<include refid="commonSelectColumnsPrefix" />
+		FROM
+		<include refid="tableNameSql" />
+	</sql>
+
+	<sql id="pagecondition">
+		<where>
+			<if test="uid!=null and uid!=''">and uid = #{uid} </if>
+			<if test="addresseetel!=null and addresseetel!=''">and addresseetel = #{addresseetel} </if>
+			<if test="status!=null and status!=''">and status = #{status} </if>
+		</where>
+		order by orderdate desc
+	</sql>
+
+	<!-- 分页查询 -->
+	<select id="findPageBy" parameterType="java.util.Map" resultMap="ordersMap">
+		<include refid="mainSql" />
+		<include refid="pagecondition" />
+	</select>
+	
+
+	<!-- 数量条件查询 -->
+	<select id="getCountBy" parameterType="java.util.Map"
+		resultType="INTEGER">
+		SELECT
+		COUNT(*) AS C
+		FROM
+		<include refid="tableNameSql" /> 
+		<include refid="pagecondition" />
+	</select>
+	
+	
+		<!-- 主键查询 -->
+	<select id="getById" parameterType="java.lang.Integer"
+		resultMap="ordersMap">
+		<include refid="mainSql" />
+		where oid=#{oid}
+	</select>
+
+
+	<insert id="save" parameterType="com.jinxiongge.model.Orders" useGeneratedKeys="true" keyProperty="oid">
+		insert into
+		<include refid="tableNameSql" />
+		(
+		<include refid="commonSelectColumnsPrefix" />
+		)
+		values
+		(
+		#{oid, jdbcType=INTEGER} ,
+		#{uid, jdbcType=INTEGER} ,
+		#{addresseename, jdbcType=VARCHAR} ,
+		#{addresseetel, jdbcType=VARCHAR} ,
+		#{address, jdbcType=VARCHAR} ,
+		#{pay, jdbcType=INTEGER} ,
+		#{carry, jdbcType=VARCHAR} ,
+		#{orderdate, jdbcType=DATE} ,
+		#{totalprice, jdbcType=DOUBLE} ,
+		#{remark, jdbcType=VARCHAR} ,
+		#{status, jdbcType=INTEGER}
+		)
+	</insert>
+	
+
+	
+	<update id="update" parameterType="com.jinxiongge.model.Orders">
+		update
+		<include refid="tableNameSql" />
+		set
+		uid=#{uid, jdbcType=INTEGER} ,
+		addresseename=#{addresseename, jdbcType=VARCHAR} ,
+		addresseetel=#{addresseetel, jdbcType=VARCHAR} ,
+		address=#{address, jdbcType=VARCHAR} ,
+		pay=#{pay, jdbcType=INTEGER} ,
+		carry=#{carry, jdbcType=VARCHAR} ,
+		orderdate=#{orderdate, jdbcType=DATE} ,
+		totalprice=#{totalprice, jdbcType=DOUBLE} ,
+		remark=#{remark, jdbcType=VARCHAR} ,
+		status=#{status, jdbcType=INTEGER}
+		where
+		<include refid="conditionOnlyId" />
+	</update>
+	
+	
+		<update id="fahuo" parameterType="java.lang.Integer">
+		update
+		<include refid="tableNameSql" />
+		set
+		status = 1
+		where
+		<include refid="conditionOnlyId" />
+	</update>
+	
+
+
+</mapper>

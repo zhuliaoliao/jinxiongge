@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinxiongge.model.User">
+	<resultMap id="userMap" type="com.jinxiongge.model.User">
+		<id column="uid" property="uid" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="truename" property="truename" jdbcType="VARCHAR" />
+		<result column="pwd" property="pwd" jdbcType="VARCHAR" />
+		<result column="birthday" property="birthday" jdbcType="DATE" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="postcode" property="postcode" jdbcType="VARCHAR" />
+		<result column="tel" property="tel" jdbcType="VARCHAR" />
+		<result column="grade" property="grade" jdbcType="INTEGER" />
+		<result column="cardtype" property="cardtype" jdbcType="VARCHAR" />
+		<result column="cardno" property="cardno" jdbcType="VARCHAR" />
+		<result property="createtime" column="createtime" javaType="STRING" jdbcType="DATE" />
+		<result property="lastlogintime" column="lastlogintime" javaType="STRING" jdbcType="DATE" />
+		<result column="freeze" property="freeze" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 表名 -->
+	<sql id="tableNameSql">
+		user 
+	</sql>
+
+	<!-- 用于select查询、insert的公用抽取的列 -->
+	<sql id="commonSelectColumnsPrefix">
+		uid ,
+		username ,
+		truename ,
+		pwd ,
+		birthday ,
+		sex ,
+		city ,
+		address ,
+		email ,
+		postcode ,
+		tel ,
+		grade ,
+		cardtype ,
+		cardno ,
+		createtime ,
+		lastlogintime ,
+		freeze
+	</sql>
+
+	<!-- 按主键查找条件语句 -->
+	<sql id="conditionOnlyId">
+		uid = #{uid}
+	</sql>
+
+	<sql id="mainSql">
+		SELECT
+		<include refid="commonSelectColumnsPrefix" />
+		FROM
+		<include refid="tableNameSql" /> u 
+	</sql>
+
+	<sql id="varSql">
+		<where>
+			<if test="username!=null and username!=''">and u.username = #{username} </if>
+			<if test="truename!=null and truename!=''">and u.truename = #{truename} </if>
+			<if test="sex!=null and sex!=''">and u.sex = #{sex} </if>
+			<if test="city!=null and city!=''">and u.city = #{city} </if>
+			<if test="address!=null and address!=''">and u.address = #{address} </if>
+			<if test="email!=null and email!=''">and u.email = #{email} </if>
+			<if test="tel!=null and tel!=''">and u.tel = #{tel} </if>
+			<if test="cardtype!=null and cardtype!=''">and u.cardtype = #{cardtype} </if>
+			<if test="cardno!=null and cardno!=''">and u.cardno = #{cardno} </if>
+		</where>
+	</sql>
+
+	<sql id="logincondition">
+		<where>
+			u.username = #{param}
+			<!-- or u.email = #{param}  -->
+			or u.tel = #{param} 
+		<!-- 	or u.cardno = #{param}  -->
+		</where>
+	</sql>
+
+	<!-- 条件分页查询 -->
+	<select id="findPageBy" parameterType="java.util.Map" resultMap="userMap">
+		<include refid="mainSql" />
+		<include refid="varSql" />
+	</select>
+	
+	<!-- 普通条件查询-->
+	<select id="commonselect" parameterType="java.util.Map" resultMap="userMap">
+		<include refid="mainSql" />
+		<include refid="varSql" />
+	</select>
+
+
+	<!-- 主键查询 -->
+	<select id="getById" parameterType="java.lang.Integer"
+		resultMap="userMap">
+		<include refid="mainSql" />
+		where
+		<include refid="conditionOnlyId" />
+	</select>
+
+	<!-- 数量条件查询 -->
+	<select id="getCountBy" parameterType="java.util.Map"
+		resultType="INTEGER">
+		SELECT
+		COUNT(*) AS C
+		FROM
+		<include refid="tableNameSql" /> u 
+		<include refid="varSql" />
+	</select>
+
+
+	<select id="login" resultType="map" resultMap="userMap">
+		<include refid="mainSql" />
+		<include refid="logincondition" />
+	</select>
+
+	<insert id="save" parameterType="com.jinxiongge.model.User"  useGeneratedKeys="true" keyProperty="uid">
+		insert into
+		<include refid="tableNameSql" />
+		(
+		<include refid="commonSelectColumnsPrefix" />
+		)
+		values
+		(
+		#{uid, jdbcType=INTEGER} ,
+		#{username, jdbcType=VARCHAR} ,
+		#{truename, jdbcType=VARCHAR} ,
+		#{pwd, jdbcType=VARCHAR} ,
+		#{birthday, jdbcType=DATE} ,
+		#{sex, jdbcType=VARCHAR} ,
+		#{city, jdbcType=VARCHAR} ,
+		#{address, jdbcType=VARCHAR} ,
+		#{email, jdbcType=VARCHAR} ,
+		#{postcode, jdbcType=VARCHAR} ,
+		#{tel, jdbcType=VARCHAR} ,
+		#{grade, jdbcType=INTEGER} ,
+		#{cardtype, jdbcType=VARCHAR} ,
+		#{cardno, jdbcType=VARCHAR} ,
+		#{createtime, jdbcType=DATE} ,
+		#{lastlogintime, jdbcType=DATE} ,
+		#{freeze, jdbcType=INTEGER}
+		)
+	</insert>
+	<update id="update" parameterType="com.jinxiongge.model.User">
+		update
+		<include refid="tableNameSql" />
+		set
+		username = #{username, jdbcType=VARCHAR} ,
+		truename = #{truename, jdbcType=VARCHAR} ,
+		pwd = #{pwd, jdbcType=VARCHAR} ,
+		birthday = #{birthday, jdbcType=DATE} ,
+		sex = #{sex, jdbcType=VARCHAR} ,
+		city = #{city, jdbcType=VARCHAR} ,
+		address = #{address, jdbcType=VARCHAR} ,
+		email = #{email, jdbcType=VARCHAR} ,
+		postcode = #{postcode, jdbcType=VARCHAR} ,
+		tel = #{tel, jdbcType=VARCHAR} ,
+		grade = #{grade, jdbcType=INTEGER} ,
+		cardtype = #{cardtype, jdbcType=VARCHAR} ,
+		cardno = #{cardno, jdbcType=VARCHAR} ,
+		freeze = #{freeze, jdbcType=INTEGER}
+		where
+		<include refid="conditionOnlyId" />
+	</update>
+	
+
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from <include refid="tableNameSql"/> where <include refid="conditionOnlyId"/>
+	</delete>
+
+</mapper>

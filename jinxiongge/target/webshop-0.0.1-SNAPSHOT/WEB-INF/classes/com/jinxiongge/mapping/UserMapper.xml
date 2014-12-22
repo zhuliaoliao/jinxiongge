@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinxiongge.user.model.User">
+
+	<resultMap id="baseUserMap" type="com.jinxiongge.user.model.User">
+		<id column="uid" property="uid" jdbcType="INTEGER" />
+		<result column="uname" property="uname" jdbcType="VARCHAR" />
+		<result column="upwd" property="upwd" jdbcType="VARCHAR" />
+		<result column="uage" property="uage" jdbcType="INTEGER" />
+		<result column="usex" property="usex" jdbcType="VARCHAR" />
+		<result column="uphone" property="uphone" jdbcType="VARCHAR" />
+		<result column="ulevel" property="ulevel" jdbcType="VARCHAR" />
+		<result column="udefaddress" property="udefaddress" jdbcType="VARCHAR" />
+		 <result property="ucreatedate" column="ucreatedate" javaType="STRING" jdbcType="DATE"/>
+		  <result property="uupdatedate" column="uupdatedate" javaType="STRING" jdbcType="DATE"/>
+	</resultMap>
+	
+	
+	<sql id="userColumns">
+		uid,uname,upwd,uage,usex,uphone,ulevel,udefaddress,ucreatedate,uupdatedate
+	</sql>
+	
+	<select id="getById" resultMap="com.jinxiongge.user.model.User.baseUserMap" parameterType="java.lang.Integer">
+		select
+		<include refid="userColumns" />
+		from user
+		where uid = #{uid,jdbcType=INTEGER}
+	</select>
+	
+	
+	<select id="findByUpwd" resultType="map" resultMap="com.jinxiongge.user.model.User.baseUserMap" >
+   		 select * from user where upwd = #{upwd};
+	</select>
+	
+	<insert id="save" parameterType="com.jinxiongge.user.model.User">
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="uid">  
+	          SELECT LAST_INSERT_ID() AS ID    
+	    </selectKey> 
+		insert into user (uname,upwd,uage,usex,uphone,ulevel,udefaddress,ucreatedate,uupdatedate
+		)
+		values (
+				#{uname,jdbcType=VARCHAR},
+			    #{upwd,jdbcType=VARCHAR},
+			    #{uage,jdbcType=INTEGER},
+				#{usex,jdbcType=VARCHAR},
+				#{uphone,jdbcType=VARCHAR},
+				#{ulevel,jdbcType=VARCHAR},
+				#{udefaddress,jdbcType=VARCHAR},
+				#{ucreatedate,jdbcType=DATE},
+				#{uupdatedate,jdbcType=DATE}
+		)
+	</insert>
+	
+</mapper>
