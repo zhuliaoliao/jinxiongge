@@ -3,7 +3,7 @@
 <div class="global-navbar navbar navbar-default" role="navigation">
 				<div class="navbar-header">
 					<a class="navbar-brand wos-brand" href="/jinxiongge/goods/goindex.do">
-						<img src="/jinxiongge/image/mcdelivery_logo_zh.jpg" alt="McDelivery&amp;trade;">
+					 <img src="/jinxiongge/image/mcdelivery_logo_zh.jpg" alt="McDelivery&amp;trade;">
 					</a>
 				</div>
 				<div class="main-navigation clearfix">

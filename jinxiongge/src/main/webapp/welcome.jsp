@@ -78,12 +78,22 @@
 					
 			
 		
-	<a class="slide-target slide-item action-ordernow cycle-slide cycle-slide-active" style="z-index: 99; position: absolute; top: 0px; left: 0px; display: block; opacity: 1; background-image: url(/jinxiongge/banners/landing_3257_landing_2636_1_CN.jpg);">
+					<!-- 		<a class="slide-target slide-item action-ordernow cycle-slide cycle-slide-active" style="z-index: 99; position: absolute; top: 0px; left: 0px; display: block; opacity: 1; background-image: url(/jinxiongge/banners/landing_3257_landing_2636_1_CN.jpg);">
 						</a><a class="slide-target slide-item action-ordernow cycle-slide" style="position: absolute; top: 0px; left: 0px; display: none; opacity: 0; z-index: 97; background-image: url(/jinxiongge/banners/landing_3259_landing_2638_2_CN.jpg);">
 						</a><a class="slide-target slide-item action-ordernow cycle-slide" style="position: absolute; top: 0px; left: 0px; display: none; opacity: 0; z-index: 96; background-image: url(/jinxiongge/banners/landing_3261_landing_2640_3_CN.jpg);">
 						</a><a class="slide-target slide-item action-ordernow cycle-slide" style="position: absolute; top: 0px; left: 0px; display: none; opacity: 0; z-index: 95; background-image: url(/jinxiongge/banners/landing_3263_landing_2642_4_CN.jpg);">
 						</a><a class="slide-target slide-item action-ordernow cycle-slide" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 100; opacity: 0; background-image: url(/jinxiongge/banners/landing_3265_landing_2644_5_CN.jpg);">
-						</a></div> 
+						</a> -->
+						
+						    <a class="slide-target slide-item action-ordernow cycle-slide cycle-slide-active" style="z-index: 99; position: absolute; top: 0px; left: 0px; display: block; opacity: 1; background-image: url(/jinxiongge/banners/banner1.jpg);">
+						</a><a class="slide-target slide-item action-ordernow cycle-slide" style="position: absolute; top: 0px; left: 0px; display: none; opacity: 0; z-index: 97; background-image: url(/jinxiongge/banners/banner2.jpg);">
+						</a><a class="slide-target slide-item action-ordernow cycle-slide" style="position: absolute; top: 0px; left: 0px; display: none; opacity: 0; z-index: 96; background-image: url(/jinxiongge/banners/banner3.jpg);">
+						</a><a class="slide-target slide-item action-ordernow cycle-slide" style="position: absolute; top: 0px; left: 0px; display: none; opacity: 0; z-index: 95; background-image: url(/jinxiongge/banners/banner4.jpg);">
+						</a><a class="slide-target slide-item action-ordernow cycle-slide" style="position: absolute; top: 0px; left: 0px; display: none; z-index: 100; opacity: 0; background-image: url(/jinxiongge/banners/banner5.jpg);">
+						</a>
+						
+						
+						</div> 
 	
 	 <c:if test="${sessionScope.user.username==null}">
 			<!-- Begin Login Panel -->
