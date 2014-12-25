@@ -68,12 +68,12 @@
  <section class="home-masthead page-masthead home-section">
 	<div class="slideshow" style="position: relative; height: 475px;">
 		
-			<div class="cycle-pager slide-pager">
+			<!-- <div class="cycle-pager slide-pager">
 			<a href="#" class="slide-pager-target ir cycle-pager-active">1</a>
 			<a href="#" class="slide-pager-target ir">2</a>
 			<a href="#" class="slide-pager-target ir">3</a>
 			<a href="#" class="slide-pager-target ir">4</a>
-			<a href="#" class="slide-pager-target ir">5</a></div>
+			<a href="#" class="slide-pager-target ir">5</a></div> -->
 				
 					
 			
