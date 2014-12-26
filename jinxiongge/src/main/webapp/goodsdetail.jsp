@@ -86,7 +86,7 @@
 										<div class="col-xs-12">
 											 <div class="form-group">
 												 <label class="field-label" for="form_accountsetting_username">图片:
-<img height="180px" width="180px" alt="${result.data.goodsname} 促销价:${result.data.nowprice}" src="/jinxiongge/goods/picture.do?gid=${result.data.gid}">
+<img alt="${result.data.goodsname} 促销价:${result.data.nowprice}" src="/jinxiongge/goods/picture.do?gid=${result.data.gid}">
 </label>
 												 
 												
