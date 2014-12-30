@@ -55,6 +55,8 @@ public interface UserDao {
 	 * @return
 	 */
 	PageList<User> findPageBy(Map<String, Object> params, PageBounds pageBounds);
+
+	Integer freeze(Map<String, Object> params);
 	
 
 }

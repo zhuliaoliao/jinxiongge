@@ -30,6 +30,12 @@ public interface UserService {
 	 * @return
 	 */
 	RtResult login(String  telname) throws CommonException;
+	/**
+	 * 冻结用户
+	 * @param param
+	 * @return
+	 */
+	RtResult freeze(Map<String, Object> params) throws CommonException;
 	
 	/**
 	 * 删除用户

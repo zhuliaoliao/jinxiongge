@@ -146,6 +146,18 @@
 		#{freeze, jdbcType=INTEGER}
 		)
 	</insert>
+	
+	
+	<update id="freeze" parameterType="java.util.Map" >
+		update
+		<include refid="tableNameSql" />
+		set
+		freeze = #{freeze}
+		where
+		<include refid="conditionOnlyId" />
+	</update>
+	
+	
 	<update id="update" parameterType="com.jinxiongge.model.User">
 		update
 		<include refid="tableNameSql" />

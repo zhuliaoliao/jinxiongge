@@ -62,5 +62,11 @@ public class UserDaoImpl extends MybatisBaseGenericDAOImpl<User, Integer> implem
 	}
 
 
+	@Override
+	public Integer freeze(Map<String, Object> params) {
+		return super.update("freeze", params) ;
+	}
+
+
 
 }

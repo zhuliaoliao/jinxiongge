@@ -1,5 +1,7 @@
 package com.jinxiongge.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @author zhull
  *
@@ -73,6 +75,9 @@ public class User {
 
 
 	public String getBirthday() {
+		if(StringUtils.isNotBlank(birthday)&&birthday.length()>10){
+			birthday= birthday.substring(0, 10);
+		}
 		return birthday;
 	}
 

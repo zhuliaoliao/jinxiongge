@@ -47,6 +47,12 @@
 								
 							</ul>
 						</li>
+						
+						<li class="menu-item menu-item-support">
+							<a class="menu-item-target dropdown-toggle" href="/jinxiongge/user/userspage.do" >
+								用户管理
+							</a>
+						</li>
 
                 
 					</ul>

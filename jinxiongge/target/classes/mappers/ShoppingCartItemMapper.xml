@@ -45,7 +45,7 @@
 	
 
 	<!-- 插入该订单的购买物品-->
-	<insert id="batchInsert" parameterType="java.util.List">
+	<insert id="batchInsert" parameterType="java.util.List"  >
 		insert into
 		<include refid="tableNameSql" />
 		(

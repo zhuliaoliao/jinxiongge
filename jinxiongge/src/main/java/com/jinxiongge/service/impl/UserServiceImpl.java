@@ -175,4 +175,23 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	@Override
+	public RtResult freeze(Map<String, Object> params) throws CommonException {
+		RtResult result = new RtResult();
+		try {
+			Integer count=userDao.freeze(params);
+			if(count!=null&&count>0){
+				result.setCode(0);
+				result.setMessage("操作成功! ");
+			}else{
+				result.setCode(ErrorCode.GOOD_CODE);
+				result.setMessage("操作失败! ");
+			}
+			log.info("操作信息:" + result);
+		} catch (Exception e) {
+			throw new CommonException(ErrorCode.GOOD_CODE, "操作失败",e);
+		}
+		return result;
+	}
+
 }

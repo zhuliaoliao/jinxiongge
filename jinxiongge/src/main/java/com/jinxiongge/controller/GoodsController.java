@@ -195,7 +195,6 @@ public class GoodsController
 	}
 	
 	/**
-	 * *只有管理员才能操作
 	 * @param gid
 	 * @param session
 	 * @return
